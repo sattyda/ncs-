@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .sliderDiv{
+            display: inline-block;
+            height: 70vh;
+            width: 100%;
+            background: aqua;
+        }
+
+        .sliderContainer{
+            white-space: nowrap;
+            position: relative;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .handles{
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+
+        #mybot{
+            cursor: pointer ;
+        }
+    </style>
+
+</head>
+<body>
+
+<script>
+    var handleleft = "PREV";
+    var handleright = "NEXT";
+</script>
+
+<div class="slider" style="position: relative">
+
+    <div class="sliderContainer" >
+
+    <div class="sliderDiv" style="background: orange">
+        Vishnu
+    </div><div  class="sliderDiv"  style="background: olivedrab">
+    Zakri
+</div><div  class="sliderDiv" style="background: #060707;color: aliceblue">
+    SATTYDA
+</div><div  class="sliderDiv" style="background: bisque">
+    Ms. Xiao
+</div><div  class="sliderDiv" style="background: navy">
+    Mr. Lee
+</div><div  class="sliderDiv" style="background: #8787b6">
+        Selvi
+    </div><div  class="sliderDiv" style="background: #558000">
+        Nai
+    </div><div  class="sliderDiv" style="background: #803a00">
+        Pooja
+    </div><div  class="sliderDiv" style="background: #b2b2c5">
+        Shane
+    </div><div  class="sliderDiv" style="background: #008053">
+    Kang
+</div><div  class="sliderDiv" style="background: #802600">
+    Mr. Y
+</div>
+</div>
+
+    <button id="prev" style="position: absolute; top: 50%; left: 0" class="handles"> <script>document.write(handleleft)</script> </button>
+    <button id="next" style="position: absolute; top: 50%; right: 0" class="handles"> <script>document.write(handleright )</script> </button>
+
+</div>
+
+<button id="mybot" style="height: 50px; width: 50px; position: fixed; border-radius: 25px; background: blueviolet; bottom: 100px; right: 100px"> BOT </button>
+
+<br/><br/>
+
+<form method="get" action="position.html" id="myform" style="display: none; position: fixed; background: #8787b6; padding: 50px; top: 20%; left: 45%">
+    <input type="text" name="username" placeholder="username"/> <br/><br/>
+    <input type="text" name="email"  placeholder="email"/> <br/> <br/>
+    <input type="submit" value="SUBMIT" />
+
+    <button id="hideform" type="button" style="position: absolute; top : 10px; right: 10px; cursor: pointer"> X </button>
+</form>
+
+<script>
+    var prevBtn = document.getElementById("prev");
+    var nextBtn = document.getElementById("next");
+
+    prevBtn.style.background = "darkred";
+    nextBtn.style.background = "darkgreen";
+
+    var sliderList = document.getElementsByClassName("sliderDiv");
+
+    var sliderContainer = document.getElementsByClassName("sliderContainer")[0];
+
+    var lengthOfSlider = sliderList[0].offsetWidth;
+
+
+
+    prevBtn.addEventListener( "click" , function (){
+        if(sliderContainer.scrollLeft == 0){
+            sliderContainer.scrollLeft = 10*lengthOfSlider;
+        }
+        else{
+            sliderContainer.scrollLeft -= lengthOfSlider;
+        }
+    });
+
+    var oldlength;
+
+    nextBtn.addEventListener( "click" , function (){
+        oldlength = sliderContainer.scrollLeft;
+        sliderContainer.scrollLeft += lengthOfSlider;
+        setTimeout( moveslider , 1000 );
+    });
+
+    function moveslider(){
+        var newlength = sliderContainer.scrollLeft;
+
+        if(oldlength === newlength){
+            sliderContainer.scrollLeft = 0;
+        }
+    }
+
+    // nextBtn.addEventListener( "click" , function (){
+    //     if(sliderContainer.scrollLeft == (10*lengthOfSlider)){
+    //         sliderContainer.scrollLeft = 0;
+    //     }
+    //     else{
+    //         sliderContainer.scrollLeft += lengthOfSlider;
+    //     }
+    // });
+
+
+    // function delay( timeinMilli ) {
+    //     return new Promise( resolve => setTimeout( resolve , timeinMilli)); lamba functions
+    // }
+
+    var isFormVisible = false;
+
+    document.getElementById("mybot").addEventListener( "click" , function (){
+
+        if( isFormVisible ){
+            document.getElementById("myform").style.display = "none";
+            isFormVisible = false;
+            this.style.background = "blueviolet";
+
+        } else {
+            document.getElementById("myform").style.display = "block";
+            isFormVisible = true;
+            this.style.background = "grey";
+        }
+    });
+
+    document.getElementById("hideform").addEventListener( "click" , function (){
+        document.getElementById("myform").style.display = "none";
+        isFormVisible = false;
+        document.getElementById("mybot").style.background = "blueviolet";
+    });
+
+
+    function setBg(element){
+        element.style.background = "blueviolet";
+    }
+</script>
+</body>
+</html>
