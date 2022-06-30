@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+           <button onclick="changeColor('red')">RED</button>
+           <button onclick="changeColor('green')">GREEN</button>
+           <button onclick="changeColor('blue')">BLUE</button>
+
+
+            <div style="background: WHITE; width: 400px; height: 400px; position: absolute; top: 20%; left: 30%; border: 1px solid crimson">
+
+            </div>
+
+    <script>
+
+
+        function changeColor(){
+            document.getElementsByTagName("div")[0].style.background = getRandomColor();
+        }
+
+        setInterval( changeColor, 500 );
+
+        function getRandomColor(){
+            var color = "rgb( "+createRandomInt( 0 , 50)  +" , "+createRandomInt( 100 , 150)  +" , "+createRandomInt( 200 , 255)  +" )";
+
+            return color;
+        }
+
+
+        function createRandomInt( min ,  max ){
+
+            var fraction = Math.random();
+
+
+            var randomInt = min +  fraction * (max - min) ;
+
+            return parseInt(randomInt);
+
+        }
+
+        console.log( createRandomInt( 110 , 210) );
+
+        // (0  , 255 )
+    </script>
+</body>
+</html>
